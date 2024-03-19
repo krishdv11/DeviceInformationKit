@@ -25,7 +25,9 @@ Pod::Spec.new do |spec|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  spec.description  = 'This DeviceInformationKit framework can be used to get all of the available information about any iOS Device.'
+  spec.description  = <<-DESC
+  This DeviceInformationKit framework can be used to get all of the available information about any iOS Device.
+  DESC
 
   spec.homepage     = "https://github.com/krishdv11/DeviceInformationKit.git"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -51,7 +53,7 @@ Pod::Spec.new do |spec|
   #  profile URL.
   #
 
-  spec.author             = { "Krishna Murari Yadav" => "krishnamurari.y@digitral.com" }
+  spec.author             = { "Krishna Murari Yadav" => "krishdv11@gmail.com" }
   # Or just: spec.author    = "Krishna Murari Yadav"
   # spec.authors            = { "Krishna Murari Yadav" => "krishnamurari.y@digitral.com" }
   # spec.social_media_url   = "https://twitter.com/Krishna Murari Yadav"
@@ -79,7 +81,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/krishdv11/DeviceInformationKit.git", :tag => "#{spec.version.to_s}" }
+  spec.source       = { :git => "https://github.com/krishdv11/DeviceInformationKit.git", :tag => "#{spec.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -90,7 +92,8 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-    spec.source_files = 'DeviceInformationKit/*.{h,swift}'
+  #  spec.source_files = 'DeviceInformationKit/*.{h,swift}'
+    spec.source_files  = "DeviceInformationKit/**/*.{h,m,swift}"
     spec.exclude_files = "Classes/Exclude"
 
   # spec.public_header_files = "Classes/**/*.h"

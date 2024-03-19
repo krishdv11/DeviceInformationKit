@@ -13,7 +13,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0DD1CC2B2BA9C75E0044BB3D /* DeviceInformationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeviceInformationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DD1CC2B2BA9C75E0044BB3D /* DeviceInformationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DeviceInformationKit.framework; path = "/Users/krishnamurari.y/Documents/Digitral Projects/DeviceInformationKit/build/Debug-iphoneos/DeviceInformationKit.framework"; sourceTree = "<absolute>"; };
 		0DD1CC2E2BA9C75E0044BB3D /* DeviceInformationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceInformationKit.h; sourceTree = "<group>"; };
 		0DD1CC2F2BA9C75E0044BB3D /* DeviceInformationKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = DeviceInformationKit.docc; sourceTree = "<group>"; };
 		0DD1CC372BA9C7780044BB3D /* DeviceInformationManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformationManger.swift; sourceTree = "<group>"; };
@@ -34,16 +34,7 @@
 			isa = PBXGroup;
 			children = (
 				0DD1CC2D2BA9C75E0044BB3D /* DeviceInformationKit */,
-				0DD1CC2C2BA9C75E0044BB3D /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		0DD1CC2C2BA9C75E0044BB3D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0DD1CC2B2BA9C75E0044BB3D /* DeviceInformationKit.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		0DD1CC2D2BA9C75E0044BB3D /* DeviceInformationKit */ = {
@@ -95,6 +86,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					0DD1CC2A2BA9C75E0044BB3D = {
@@ -111,7 +103,7 @@
 				Base,
 			);
 			mainGroup = 0DD1CC212BA9C75E0044BB3D;
-			productRefGroup = 0DD1CC2C2BA9C75E0044BB3D /* Products */;
+			productRefGroup = 0DD1CC212BA9C75E0044BB3D;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
