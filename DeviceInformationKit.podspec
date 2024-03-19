@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "DeviceInformationKit"
   spec.version      = "1.0.0"
-  spec.swift_versions = "4.0"
+  spec.swift_versions = "4.2"
   spec.summary      = "Using DeviceInformationKit you can get any iOS device Available informations."
 
   # This description is used to generate tags and improve search results.
