@@ -6,6 +6,20 @@
 	objectVersion = 56;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		0DD1CC732BAA32CB0044BB3D /* DeviceInformationKit-Universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 0DD1CC762BAA32CB0044BB3D /* Build configuration list for PBXAggregateTarget "DeviceInformationKit-Universal" */;
+			buildPhases = (
+				0DD1CC772BAA32D30044BB3D /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "DeviceInformationKit-Universal";
+			productName = "DeviceInformationKit-Universal";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		0DD1CC302BA9C75E0044BB3D /* DeviceInformationKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1CC2F2BA9C75E0044BB3D /* DeviceInformationKit.docc */; };
 		0DD1CC312BA9C75E0044BB3D /* DeviceInformationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD1CC2E2BA9C75E0044BB3D /* DeviceInformationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -13,10 +27,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0DD1CC2B2BA9C75E0044BB3D /* DeviceInformationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DeviceInformationKit.framework; path = "/Users/krishnamurari.y/Documents/Digitral Projects/DeviceInformationKit/build/Debug-iphoneos/DeviceInformationKit.framework"; sourceTree = "<absolute>"; };
 		0DD1CC2E2BA9C75E0044BB3D /* DeviceInformationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceInformationKit.h; sourceTree = "<group>"; };
 		0DD1CC2F2BA9C75E0044BB3D /* DeviceInformationKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = DeviceInformationKit.docc; sourceTree = "<group>"; };
 		0DD1CC372BA9C7780044BB3D /* DeviceInformationManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInformationManger.swift; sourceTree = "<group>"; };
+		0DD1CC722BAA329E0044BB3D /* DeviceInformationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeviceInformationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +48,7 @@
 			isa = PBXGroup;
 			children = (
 				0DD1CC2D2BA9C75E0044BB3D /* DeviceInformationKit */,
+				0DD1CC722BAA329E0044BB3D /* DeviceInformationKit.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,7 +91,7 @@
 			);
 			name = DeviceInformationKit;
 			productName = DeviceInformationKit;
-			productReference = 0DD1CC2B2BA9C75E0044BB3D /* DeviceInformationKit.framework */;
+			productReference = 0DD1CC722BAA329E0044BB3D /* DeviceInformationKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -90,6 +105,9 @@
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					0DD1CC2A2BA9C75E0044BB3D = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					0DD1CC732BAA32CB0044BB3D = {
 						CreatedOnToolsVersion = 15.2;
 					};
 				};
@@ -108,6 +126,7 @@
 			projectRoot = "";
 			targets = (
 				0DD1CC2A2BA9C75E0044BB3D /* DeviceInformationKit */,
+				0DD1CC732BAA32CB0044BB3D /* DeviceInformationKit-Universal */,
 			);
 		};
 /* End PBXProject section */
@@ -121,6 +140,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0DD1CC772BAA32D30044BB3D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "echo \"project\"\n#open \"${PROJECT_DIR}\"\nif [ \"true\" == ${ALREADYINVOKED:-false} ]\nthen\necho \"RECURSION: Detected, stopping\"\nelse\nexport ALREADYINVOKED=\"true\"\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-iosuniversal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 1. Build Device and Simulator versions\necho \"iphone\"\nxcodebuild -target \"${TARGET_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos  BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" build\necho \"iphonesim\"\nxcodebuild -target \"${TARGET_NAME}\" -configuration ${CONFIGURATION} -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" build\n\n## Step 2. Copy the framework structure (from iphoneos build) to the universal folder\necho \"universal\"\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n\n# Step 3. Copy Swift modules from iphonesimulator build (if it exists) to the copied framework directory\necho \"iphone simulator path\"\nSIMULATOR_SWIFT_MODULES_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule/.\"\nif [ -d \"${SIMULATOR_SWIFT_MODULES_DIR}\" ]; then\ncp -R \"${SIMULATOR_SWIFT_MODULES_DIR}\" \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/Modules/${PROJECT_NAME}.swiftmodule\"\nfi\n\n# Step 4. Create universal binary file using lipo and place the combined executable in the copied framework directory\necho \"lipo create\"\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\necho \"end\"\nfi\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0DD1CC272BA9C75E0044BB3D /* Sources */ = {
@@ -322,6 +361,24 @@
 			};
 			name = Release;
 		};
+		0DD1CC742BAA32CB0044BB3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XB45D9TT4D;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0DD1CC752BAA32CB0044BB3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XB45D9TT4D;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -339,6 +396,15 @@
 			buildConfigurations = (
 				0DD1CC352BA9C75E0044BB3D /* Debug */,
 				0DD1CC362BA9C75E0044BB3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DD1CC762BAA32CB0044BB3D /* Build configuration list for PBXAggregateTarget "DeviceInformationKit-Universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DD1CC742BAA32CB0044BB3D /* Debug */,
+				0DD1CC752BAA32CB0044BB3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
